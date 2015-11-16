@@ -48,11 +48,11 @@ var Journal = new mongoose.Schema({
 
 
 Wireframes:
-![Wireframe:](/img/wireframe.jpg?raw=true "Wireframe")
+![Wireframe:](/img/wireframe.jpg "Wireframe")
 
 
 Site Map:
-![Site Map:](/img/sitemap.jpg?raw=true "Site Map")
+![Site Map:](/img/sitemap.jpg "Site Map")
 
 
 User Stories:

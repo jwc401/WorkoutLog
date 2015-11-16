@@ -15,6 +15,7 @@ Project Description:
 
 Data Model:
 
+```javascript
 //Users
 
 
@@ -25,7 +26,7 @@ Data Model:
 
 
 //Journal Entries
-
+```
 
 
 

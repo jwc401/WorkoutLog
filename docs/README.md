@@ -1,20 +1,40 @@
 Applied Internet Tech Final Project
+
+
 Jonathan Chua
+
 
 *Note: All aspects of the final project listed here are subject to changes/modifications and may differ from the finished project*
 
 
+
 Project Description:
-	For this project, I intend to make a athletic training site. On it, a user will be able to 
+	For this project, I intend to make a exercise training and monitoring site. On it, a user will be able to access the main page (directory).One thing they can do is create and modify their workout exercises, and is that is saved to them. Another thing that they can do is to create and maintain a journal of their workouts, on which they can enter a main journal page where they can either access previous journal entries or go and create a new journal entry in which they can report on how they did during their workout (can access information entered from the workout exercises page) via text and other methods.
+
 
 
 Data Model:
+
+//Users
+
+
+//Workout Exercises
+
+
+//Journals
+
+
+//Journal Entries
+
+
 
 
 Wireframes:
 
 
+
 Potential modules/concepts to research: (Subject to change)
+
 
 
 

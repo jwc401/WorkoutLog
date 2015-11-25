@@ -1,4 +1,4 @@
-//Main page
+//Login page
 
 //Mongoose setup
 var mongoose = require('mongoose');
@@ -14,7 +14,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('login');
+});
+
+router.post('/', function(req, res, next) {
+	//Insert login stuff happening, work in progress
+	res.redirect('/');
 });
 
 

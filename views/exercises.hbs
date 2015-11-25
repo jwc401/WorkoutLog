@@ -1,0 +1,23 @@
+<h1 >Exercise Log</h1>
+
+<h2 >View and Modify Exercises</h2>
+
+
+<p>Exercise list:</p>
+<ul>
+	{{#each exercises}}
+		<li>{{this.name}} x {{this.quantity}} at intensity {{this.intensity}}</li>
+	{{/each}}
+</ul>
+
+
+<form method="POST" action="">
+	<div>Name: <input name = "name" type="text"></div>
+	<div>Quantity: <input quantity = "quantity" type="text"></div>
+	<div>Intensity: <input intensity = "intensity" type="text"></div>
+	<div><input value="Insert exercise" type="submit"></div>
+</form>
+
+
+<p>--------------------</p>
+<i><a href="/">Main Page</a> | <a href="/journals">Journals</a></i>

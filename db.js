@@ -17,13 +17,13 @@ var Entry = new mongoose.Schema({
   exercises: [Exercises],
   comments: {type: String, required: false}
 });
-Entry.plugin(URLSlugs('name')); //URL slug for the list, so that we can find and then navigate to that specific list later on
+Entry.plugin(URLSlugs('date')); //URL slug for the list, so that we can find and then navigate to that specific list later on
 
 //Journals
 var Journal = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-  date: {type: Date, required: true},
-  name: {type: String, required: true},
+  //date: {type: Date, required: true},
+  //name: {type: String, required: true},
   entries: [Entry]
 });
 

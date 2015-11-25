@@ -1,0 +1,22 @@
+<h1>Exercise Log</h1>
+
+<h2>Access and/or Create Journals</h2>
+
+
+<p>Show journal list here</p>
+<ul>
+	{{#each entries}}
+		<li><a href="/list/{{this.slug}}"">{{this.date}}</a></li>
+	{{/each}}
+</ul>
+
+
+<form method="POST" action="/journals/create">
+	<div>Name: <input name = "name" type="text"></div>
+	<div>Date: <input date = "date" type="date"></div>
+	<div><input value="Create new journal entry" type="submit"></div>
+</form>
+
+
+<p>--------------------</p>
+<i><a href="/">Main Page</a> | <a href="/exercises">Exercises</a></i> | <a href="/journals">Journals</a></i>

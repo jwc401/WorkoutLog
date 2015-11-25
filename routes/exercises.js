@@ -14,8 +14,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.send("View and edit exercises page");
-  //res.render('index', { title: 'Express' });
+	//res.send("View and edit exercises page");
+	res.render('exercises');
+});
+
+
+router.post('/', function(req, res, next) {
+	//Modify the exercise
+	res.redirect('/exercises');
 });
 
 module.exports = router;

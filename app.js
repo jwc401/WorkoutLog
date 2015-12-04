@@ -5,6 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+//Mongoose stuff
+require('./db'); //Mongoose! Setup stuff
+var mongoose = require('mongoose');
+var Exercises = mongoose.model('Exercises');
+var Entry = mongoose.model('Entry');
+var Journal = mongoose.model('Journal');
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var exercises = require('./routes/exercises');
@@ -27,12 +36,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//Mongoose stuff
-require('./db'); //Mongoose! Setup stuff
-var mongoose = require('mongoose');
-var Exercises = mongoose.model('Exercises');
-var Entry = mongoose.model('Entry');
-var Journal = mongoose.model('Journal');
+
 
 
 app.use('/', routes);

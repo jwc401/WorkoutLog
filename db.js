@@ -35,5 +35,5 @@ mongoose.model('Entry', Entry);
 mongoose.model('Journal', Journal);
 
 
-mongoose.connect('mongodb://localhost/exercisedb'); //Connects to the database
+mongoose.connect('mongodb://localhost:10131/exercisedb'); //Connects to the database
 

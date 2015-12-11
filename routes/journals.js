@@ -24,6 +24,7 @@ router.get('/sort', function(req, res) {
 	//res.send(req.user);
 	//console.log(req.user);
 	var queryDate = req.query.mmddyy;
+	var query = req.query; //Is returned as an empty object for some reason...
 	console.log(queryDate);
 	var hold = [];
 	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
@@ -31,9 +32,10 @@ router.get('/sort', function(req, res) {
 	    var count = 0;
 	    if (user.entry[0].date != undefined) {
 	    	do {
-	    		var entryDate = user.entry[count].date;
+	    		hold.push(user.entry[count])	;
+	    		//var entryDate = user.entry[count].date;
 	    		//if (req.query.mmddyy == entryDate) {
-	    			hold.push(entryDate);
+	    			//hold.push(entryDate);
 	    			//hold.push(user.entry[count]);
 	    		//}
 	    		count++;
@@ -42,7 +44,6 @@ router.get('/sort', function(req, res) {
 	    }
 	    res.send(hold);
   	});
-
 	/*
 	var entryFilter = {};
 	var searchExists = false;

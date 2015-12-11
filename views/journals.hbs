@@ -4,29 +4,38 @@
 
 <script>
 	//AJAX!!!
-	
 	function addListen(evt) {
 		console.log(evt);
 		evt.preventDefault();
 		var req = new XMLHttpRequest();
 		var url = "/journals/sort";
 		var mmddyy = document.getElementById("mmddyy").value;
-		console.log(mmddyy);
+		console.log("Searching for: " + mmddyy);
 		req.open('GET', url, true);
 		console.log('clicked');
 		function addLoad() {
-			console.log(req.responseText);
-			/*
-			var entrySet = document.createElement("ul");
-			entryList.setAttribute("id", "jEntries");
-			document.body.append(entrySet);
-			JSON.parse(req.responseText).forEach(function(entries) {
-				var line = appendChild(document.createElement('li')).textContent = entry.date;
-			});
-			var entryList = document.getElementById('entryList');
-			entryList.parentNode.replaceChild(entrySet, entryList);
-			*/
+			//console.log(req.responseText);
+			var entrySet = JSON.parse(req.responseText);
 			//console.log(entrySet);
+			var entryDate; //Holds the entry object that matches the entry date we are searching for
+			Object.keys(entrySet).forEach(function(key){
+				if (mmddyy === entrySet[key].date) {
+					entryDate = entrySet[key];
+				}
+			});	
+			//console.log(entryDate);
+			//console.log(entryDate.date);
+			var entrySearch = document.getElementById("entryList")
+			var sorted = entrySearch.appendChild(document.createElement('div'));
+			sorted.textContent = "test";
+			document.getElementById("line").href = "/journals/" + entryDate.slug;	
+
+			var entrySearch = document.createElement("ul");
+			entrySearch.id = "entryList";
+			var line = entrySearch.appendChild(document.createElement('li')).textContent = entryDate.date;
+			var entryList = document.getElementById('entrySearch');
+			entryList.parentNode.replaceChild(entrySearch, entryList);
+			console.log(entrySearch);
 		}
 		req.addEventListener("load", addLoad);
 		req.send();
@@ -36,36 +45,14 @@
 		dateSort.addEventListener("click", addListen);	
 	}
 	document.addEventListener("DOMContentLoaded", funct)
-
-	/*
-	var dateSort = document.getElementById('dateSort');
-	dateSort.addEventListener("click", function(evt){
-		evt.preventDefault();
-		var req = new XMLHttpRequest();
-		//req.open('GET', url, true);
-		console.log('clicked');
-		req.addEventListener("load", function() {
-			console.log(req.responseText);
-			var entrySet = document.CreateElement("ul");
-			entryList.setAttribute("id", "jEntries");
-			document.body.append(entrySet);
-			JSON.parse(req.responseText).forEach(function(entries) {
-				var line = appendChild(document.createElement('li')).textContent = movie.title;
-			});
-			var entryList = document.getElementById('entryList');
-			entryList.parentNode.replaceChild(entrySet, entryList);
-			//console.log(entrySet);
-		});
-		req.send();
-		});
-	})*/
 </script>
+
 <p>Journal Entries: </p>
 <div>Search for MM-DD-YY: 
-<form method="get" id="sortEntries" action="">
-	<input id="mmddyy" name="mmddyy" type="text">
-	<input id="dateSort" type="submit">
-</form>
+	<form method="get" id="sortEntries" action="">
+		<input id="mmddyy" name="mmddyy" type="text">
+		<input id="dateSort" type="submit">
+	</form>
 </div>
 
 

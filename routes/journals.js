@@ -56,10 +56,11 @@ router.post('/create', function(req, res, next) {
 	    	var exName = user.exercises[count].name;
 	    	var exQuantity = user.exercises[count].quantity;
 	    	var exIntensity = user.exercises[count].intensity;
-	    	exerciseSet.push({user: req.user._id, name: exName, quantity: exQuantity, intensity: exIntensity});
+	    	var exChecked = false;
+	    	exerciseSet.push({user: req.user._id, name: exName, quantity: exQuantity, intensity: exIntensity, checked: exChecked});
 	    	count++;
 	    }
-		console.log(exerciseSet);
+		//console.log(exerciseSet);
       	var newEntry = new Entry({ //Creates a new object with the properties of the new list
 			user: req.user._id,
 			date: dateIn,
@@ -70,6 +71,7 @@ router.post('/create', function(req, res, next) {
 		});
 		//Save set of exercises into the entry!
 		newEntry.save(function(err, saveEntry, count) { //Saves the new entry to the groups of entries in user
+			//console.log(err);
 			req.user.entry.push(saveEntry._id);
 		    req.user.save(function(err, saveUser, count) {
 		    	res.redirect('/journals/'+dateIn);
@@ -119,6 +121,7 @@ router.post('/check', function(req, res, next) {
 				foundEntry.exercises[i].checked = true;
 			}
 		}
+		console.log(foundEntry.exercises);
 		user.entry[count].markModified('exercises'); //Note that we have modified the items inside it
 		user.entry[count].save(function(err, userl) {
 			res.redirect('/journals/'+foundEntry.slug);
@@ -146,8 +149,8 @@ router.post('/modEntry', function(req, res, next) {
 		foundEntry.comments = comment;
 		console.log(foundEntry.comments);
 		user.entry[count].markModified('comments'); //Note that we have modified the items inside it
-		user.save(function(err, userl) {
-			res.redirect('back');
+		user.entry[count].save(function(err, userl) {
+			res.redirect('/journals/'+foundEntry.slug);
 		});
   	});
 })

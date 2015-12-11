@@ -2,21 +2,82 @@
 
 <h2>Access and/or Create Journals</h2>
 
+<script>
+	//AJAX!!!
+	
+	function addListen(evt) {
+		console.log(evt);
+		evt.preventDefault();
+		var req = new XMLHttpRequest();
+		var url = "/journals/sort";
+		var mmddyy = document.getElementById("mmddyy").value;
+		console.log(mmddyy);
+		req.open('GET', url, true);
+		console.log('clicked');
+		function addLoad() {
+			console.log(req.responseText);
+			/*
+			var entrySet = document.createElement("ul");
+			entryList.setAttribute("id", "jEntries");
+			document.body.append(entrySet);
+			JSON.parse(req.responseText).forEach(function(entries) {
+				var line = appendChild(document.createElement('li')).textContent = entry.date;
+			});
+			var entryList = document.getElementById('entryList');
+			entryList.parentNode.replaceChild(entrySet, entryList);
+			*/
+			//console.log(entrySet);
+		}
+		req.addEventListener("load", addLoad);
+		req.send();
+	}
+	function funct() {
+		var dateSort = document.getElementById('dateSort');
+		dateSort.addEventListener("click", addListen);	
+	}
+	document.addEventListener("DOMContentLoaded", funct)
 
-<p>Show journal list here</p>
-<ul>
+	/*
+	var dateSort = document.getElementById('dateSort');
+	dateSort.addEventListener("click", function(evt){
+		evt.preventDefault();
+		var req = new XMLHttpRequest();
+		//req.open('GET', url, true);
+		console.log('clicked');
+		req.addEventListener("load", function() {
+			console.log(req.responseText);
+			var entrySet = document.CreateElement("ul");
+			entryList.setAttribute("id", "jEntries");
+			document.body.append(entrySet);
+			JSON.parse(req.responseText).forEach(function(entries) {
+				var line = appendChild(document.createElement('li')).textContent = movie.title;
+			});
+			var entryList = document.getElementById('entryList');
+			entryList.parentNode.replaceChild(entrySet, entryList);
+			//console.log(entrySet);
+		});
+		req.send();
+		});
+	})*/
+</script>
+<p>Journal Entries: </p>
+<div>Search for MM-DD-YY: 
+<form method="get" id="sortEntries" action="">
+	<input id="mmddyy" name="mmddyy" type="text">
+	<input id="dateSort" type="submit">
+</form>
+</div>
+
+
+<ul id="entryList">
 	{{#each entries}}
-		<li><a href="/list/{{this.slug}}"">{{this.date}}</a></li>
+		<li><a href="/journals/{{this.slug}}"">{{this.date}}</a></li>
 	{{/each}}
 </ul>
 
 
 <form method="POST" action="/journals/create">
 	<div>Name: <input name = "name" type="text"></div>
-	<div>Date: <input date = "date" type="date"></div>
+	<div>Date (MMDDYY): <input name = "date" type="text"></div>
 	<div><input value="Create new journal entry" type="submit"></div>
 </form>
-
-
-<p>--------------------</p>
-<i><a href="/">Main Page</a> | <a href="/exercises">Exercises</a></i> | <a href="/journals">Journals</a></i>

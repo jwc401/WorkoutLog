@@ -6,22 +6,36 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 
+
 //Mongoose stuff
-require('./db'); //Mongoose! Setup stuff
+require('./db'); //Database
+require('./auth'); //Authentication
 var mongoose = require('mongoose');
+var passport = require('passport');
 var Exercises = mongoose.model('Exercises');
 var Entry = mongoose.model('Entry');
 var Journal = mongoose.model('Journal');
 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 var exercises = require('./routes/exercises');
 var journals = require('./routes/journals');
-var login = require('./routes/login');
-var userCreate = require('./routes/userCreate');
+//var login = require('./routes/login');
+//var userCreate = require('./routes/userCreate');
 
 var app = express();
+
+
+//Session support for Authentication
+var session = require('express-session');
+var sessionOptions = {
+  secret: 'secret cookie thang (store this elsewhere!)',
+  resave: true,
+  saveUninitialized: true
+};
+app.use(session(sessionOptions));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -36,15 +50,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//Use passport and enable sessions
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Makes user data available for all templates
+app.use(function(req, res, next){
+  res.locals.user = req.user;
+  next();
+});
 
 
 app.use('/', routes);
-app.use('/users', users);
+//app.use('/users', users);
 app.use('/exercises', exercises);
 app.use('/journals', journals);
-app.use('/login', login);
-app.use('/userCreate', userCreate);
+//app.use('/login', login);
+//app.use('/userCreate', userCreate);
 
 
 // catch 404 and forward to error handler

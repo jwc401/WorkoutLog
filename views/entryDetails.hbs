@@ -4,11 +4,16 @@
 
 
 <p>Show all the exercises</p>
+<p>Exercise list:</p>
+<ul>
+	{{#each exercises}}
+		<li>{{this.name}} x {{this.quantity}} at intensity {{this.intensity}}</li>
+	{{/each}}
+</ul>
 
-
-
-<p>Insert comments about said exercises</p>
-
-
-<p>--------------------</p>
-<i><a href="/">Main Page</a> | <a href="/journals">Journals</a></i>
+	
+<form method="POST" action="/journals/modEntry">
+	<textarea name="comments" rows="10" cols="60">Insert comments about said exercises</textarea>
+ 	<br><br>
+ 	<input type="submit">
+</form>

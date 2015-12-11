@@ -5,6 +5,16 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    {{{body}}}
+  	<h1>Exercise Log</h1>
+	{{#if user}}
+	<div>You're currently logged in as: <a href=/users/{{user.username}}>{{user.username}}</a></div>
+	<div><i><a href="/">Main Page</a> | <a href="/exercises">Exercises</a> | <a href="/journals">Journals</a></i></div>
+	{{else}}
+	<div> If you are a previous user, please <a href="/login">Login</a></div>
+	<div> If you are a new user, please <a href="/register">Register</a></div>
+	{{/if}}
+	<div>
+		{{{body}}}
+	</div>
   </body>
 </html>

@@ -69,7 +69,7 @@ router.post('/create', function(req, res, next) {
 			//checked: false
 		});
 		//Save set of exercises into the entry!
-		newEntry.save(function(err, saveEntry, count) { //Saves the new list to the groups of lists
+		newEntry.save(function(err, saveEntry, count) { //Saves the new entry to the groups of entries in user
 			req.user.entry.push(saveEntry._id);
 		    req.user.save(function(err, saveUser, count) {
 		    	res.redirect('/journals/'+dateIn);

@@ -3,17 +3,28 @@
 <h2>Viewing Journal Entry on date: {{this.date}}</h2>
 
 
-<p>Show all the exercises</p>
 <p>Exercise list:</p>
+<form method="POST" id="checkOff" action="/journals/check">
 <ul>
 	{{#each exercises}}
-		<li>{{this.name}} x {{this.quantity}} at intensity {{this.intensity}}</li>
+			{{#if this.checked}}
+				<strike><li>{{this.name}} x {{this.quantity}} at intensity {{this.intensity}}</li></strike>				
+			{{else}}
+				<li><input type="checkbox" name={{this.name}} value="1"> {{this.name}} x {{this.quantity}} at intensity {{this.intensity}}</li>
+			{{/if}}
 	{{/each}}
 </ul>
+<input name=slug value={{slug}} type="hidden">
+<input value="Check item off" type="submit">
+</form>
 
-	
-<form method="POST" action="/journals/modEntry">
-	<textarea name="comments" rows="10" cols="60">Insert comments about said exercises</textarea>
- 	<br><br>
+
+
+
+
+<p>Comments: {{commentRead}} </p>
+<form method="POST" id="commentAdd" action="/journals/modEntry">
+	<input type="hidden" name="slug" value={{slug}}>
  	<input type="submit">
 </form>
+<textarea name="comments" rows="10" cols="60" form="commentAdd">Insert comments about said exercises</textarea>

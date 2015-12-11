@@ -22,20 +22,17 @@
 				if (mmddyy === entrySet[key].date) {
 					entryDate = entrySet[key];
 				}
-			});	
-			//console.log(entryDate);
-			//console.log(entryDate.date);
-			var entrySearch = document.getElementById("entryList")
-			var sorted = entrySearch.appendChild(document.createElement('div'));
-			sorted.textContent = "test";
-			document.getElementById("line").href = "/journals/" + entryDate.slug;	
-
-			var entrySearch = document.createElement("ul");
-			entrySearch.id = "entryList";
-			var line = entrySearch.appendChild(document.createElement('li')).textContent = entryDate.date;
-			var entryList = document.getElementById('entrySearch');
-			entryList.parentNode.replaceChild(entrySearch, entryList);
-			console.log(entrySearch);
+			});
+			var ul = document.querySelector('ul');
+			var i = 0;
+			while(ul.childNodes[i]) {
+				console.log(ul.childNodes[i]);
+				ul.removeChild(ul.childNodes[i]);
+			}
+			var li = ul.appendChild(document.createElement('li'));
+			var sort = li.appendChild(document.createElement('a'));
+			sort.href = '/journals/' + entryDate.slug;
+			sort.textContent = entryDate.date;
 		}
 		req.addEventListener("load", addLoad);
 		req.send();
@@ -46,6 +43,7 @@
 	}
 	document.addEventListener("DOMContentLoaded", funct)
 </script>
+
 
 <p>Journal Entries: </p>
 <div>Search for MM-DD-YY: 
@@ -64,7 +62,8 @@
 
 
 <form method="POST" action="/journals/create">
-	<div>Name: <input name = "name" type="text"></div>
 	<div>Date (MMDDYY): <input name = "date" type="text"></div>
 	<div><input value="Create new journal entry" type="submit"></div>
 </form>
+
+

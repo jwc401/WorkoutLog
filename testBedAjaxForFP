@@ -1,0 +1,98 @@
+<div>Sort By: 
+<form method="POST" id="sortEntries" action="">
+	<select name="filterType">
+	<option value="month">Month</option>
+	<option value="day">Day</option>
+	<option value="year">Year</option>
+	</select>
+	<input name = "filterVal" type="text">
+	<input value="dateSort" type="submit">
+</form>
+</div>
+
+
+
+/*
+	var dateSort = document.getElementById('dateSort');
+	dateSort.addEventListener("click", function(evt){
+		evt.preventDefault();
+		var req = new XMLHttpRequest();
+		//req.open('GET', url, true);
+		console.log('clicked');
+		req.addEventListener("load", function() {
+			console.log(req.responseText);
+			var entrySet = document.CreateElement("ul");
+			entryList.setAttribute("id", "jEntries");
+			document.body.append(entrySet);
+			JSON.parse(req.responseText).forEach(function(entries) {
+				var line = appendChild(document.createElement('li')).textContent = movie.title;
+			});
+			var entryList = document.getElementById('entryList');
+			entryList.parentNode.replaceChild(entrySet, entryList);
+			//console.log(entrySet);
+		});
+		req.send();
+		});
+	})*/
+
+	/*
+	var count = 0;
+	while (req.responseText[count] != "undefined") {
+		//console.log(mmddyy + " " + entryDates[count].date);
+		//console.log(mmddyy == entryDates[count].date);
+		if (mmddyy == entryDates[count].date) {
+			entrySet.push(entryDates[count]);
+			console.log(entryDates[count]);
+			entryDate = entryDates[count];
+		}
+		count++;
+	}
+	console.log(entrySet);
+	console.log(entryDate);
+	*/
+
+
+/*
+//console.log(entryDate);
+//console.log(entryDate.date);
+var entrySearch = document.getElementById("entryList")
+var sorted = entrySearch.appendChild(document.createElement('div'));
+sorted.textContent = "test";
+document.getElementById("line").href = "/journals/" + entryDate.slug;	
+
+var entrySearch = document.createElement("ul");
+entrySearch.id = "entryList";
+var line = entrySearch.appendChild(document.createElement('li')).textContent = entryDate.date;
+var entryList = document.getElementById('entrySearch');
+entryList.parentNode.replaceChild(entrySearch, entryList);
+*/
+//console.log(entrySearch);
+
+
+/*
+var newItems = ["new1", "new2"];
+newItems.forEach(function(s) {
+	var li = ul.appendChild(document.createElement('li'));
+	var a = li.appendChild(document.createElement('a'));
+	a.href = '/' + s;
+	a.textContent = s;
+});
+*/
+/*
+var myNode = document.getElementById("entryList");
+while (myNode.firstChild) {
+    myNode.removeChild(myNode.firstChild);
+}
+var listEl = document.createElement("LI");
+console.log(entryDate.slug);
+listEl.href= "/journals/" + entryDate.slug;
+listEl.textContent = entryDate.date;
+//var textEl = document.createTextNode(entryDate.date);
+//listEl.setAttribute("id", "sortedListEl");
+//document.getElementById("sortedListEl").href = "/journals/" + entryDate.slug;
+//listEl.appendChild(textEl);
+document.getElementById("entryList").appendChild(listEl);
+*/
+
+
+

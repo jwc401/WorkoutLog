@@ -27,7 +27,8 @@ router.post('/', function(req, res, next) {
 	  	user: req.user._id,
 	  	name: req.body.name, //MODIFY TO FIX IT IF req.body IS NOT CORRECT
 	  	quantity: req.body.quantity,
-	  	intensity: req.body.intensity
+	  	intensity: req.body.intensity,
+	  	checked: false
   	});
   	newExercise.save(function(err, saveExercise, count) {
 	    req.user.exercises.push(saveExercise._id);

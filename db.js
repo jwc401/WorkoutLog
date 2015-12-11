@@ -17,7 +17,8 @@ var Exercises = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   name: {type: String, required: true},
   quantity: {type: Number, min: 1, required: true},
-  intensity: {type: String, required: true}
+  intensity: {type: String, required: true},
+  checked: {type: Boolean, required: true}
 });
 
 //Journal Entries

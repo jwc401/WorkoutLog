@@ -104,6 +104,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(10130);
+app.listen(10130); //Remove when deploying on i6
 console.log('Server started on port 10130');
 

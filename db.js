@@ -8,11 +8,11 @@ var passportLocalMongoose = require('passport-local-mongoose'); //Passport used 
 //Schemas go here:
 //User schema
 var User = new mongoose.Schema({
-  exercises: [{type: mongoose.Schema.Types.ObjectId, ref:'Exercises'}], //Put this before or after their definition in db.js???
-  entry: [{type: mongoose.Schema.Types.ObjectId, ref:'Entry'}]
+  exercises: [{type: mongoose.Schema.Types.ObjectId, ref:'Exercises'}], //Holds all the user's exercises
+  entry: [{type: mongoose.Schema.Types.ObjectId, ref:'Entry'}] //Holds all the user's journal entries
 });
 
-//Exercises
+//Exercises schema
 var Exercises = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   name: {type: String, required: true},
@@ -21,22 +21,22 @@ var Exercises = new mongoose.Schema({
   checked: {type: Boolean, required: true}
 });
 
-//Journal Entries
+//Journal Entries schema
 var Entry = new mongoose.Schema({
   user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-  //date: {type: Date, required: true},
+  //date: {type: Date, required: true}, //Normal date stuff was too finicky and glitchy, so I just used a string
   date: {type: String, required: true},
   exercises: [Exercises],
   comments: {type: String, required: false}
 });
-Entry.plugin(URLSlugs('date')); //URL slug for the list, so that we can find and then navigate to that specific list later on
+Entry.plugin(URLSlugs('date')); //URL slug for the entry, so that we can find and then navigate to that specific entry later on
 
-//Journals
+//Journals //Phased out, was redundant
 var Journal = new mongoose.Schema({
-  user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
   //user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-  //date: {type: Date, required: true},
-  //name: {type: String, required: true},
+  user: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+  date: {type: Date, required: true},
+  name: {type: String, required: true},
   entries: [Entry]
 });
 

@@ -13,7 +13,7 @@ var express = require('express');
 var router = express.Router();
 
 
-/* GET home page. */
+/* Get exercises page. */
 router.get('/', function(req, res, next) {
 	User.findOne({username: req.user.username}).populate('exercises').exec(function(err, user) {
 	    res.render('exercises', {exercises: user.exercises});
@@ -21,19 +21,19 @@ router.get('/', function(req, res, next) {
 });
 
 
-
+//Post new exercise to the page and save it to the exercises schema inside user
 router.post('/', function(req, res, next) {
-	var newExercise = new Exercises({
+	var newExercise = new Exercises({ //New exercise with these parameters
 	  	user: req.user._id,
-	  	name: req.body.name, //MODIFY TO FIX IT IF req.body IS NOT CORRECT
+	  	name: req.body.name,
 	  	quantity: req.body.quantity,
 	  	intensity: req.body.intensity,
 	  	checked: false
   	});
-  	newExercise.save(function(err, saveExercise, count) {
+  	newExercise.save(function(err, saveExercise, count) { //Save the new exercise into the schema
 	    req.user.exercises.push(saveExercise._id);
 	    req.user.save(function(err, saveUser, count) {
-	      res.redirect('/exercises');
+	      res.redirect('/exercises'); //Redirect back to the exercise page
 	    });
   	});
 });

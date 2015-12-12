@@ -1,8 +1,3 @@
-
-
-<h2>Access and/or Create Journals</h2>
-
-<script>
 	//AJAX!!!
 	function addListen(evt) {
 		console.log(evt);
@@ -42,28 +37,3 @@
 		dateSort.addEventListener("click", addListen);	
 	}
 	document.addEventListener("DOMContentLoaded", funct);
-</script>
-
-
-<p>Journal Entries: </p>
-<div>Search for MM-DD-YY: 
-	<form method="get" id="sortEntries" action="">
-		<input id="mmddyy" name="mmddyy" type="text">
-		<input id="dateSort" type="submit">
-	</form>
-</div>
-
-
-<ul id="entryList">
-	{{#each entries}}
-		<li><a href="/journals/{{this.slug}}"">{{this.date}}</a></li>
-	{{/each}}
-</ul>
-
-
-<form method="POST" action="/journals/create">
-	<div>Date (MMDDYY): <input name = "date" type="text"></div>
-	<div><input value="Create new journal entry" type="submit"></div>
-</form>
-
-

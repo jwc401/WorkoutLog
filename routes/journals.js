@@ -13,7 +13,7 @@ var express = require('express');
 var router = express.Router();
 
 
-
+//Get the main /journals page
 router.get('/', function(req, res, next) {
 	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
 	    res.render('journals', {entries: user.entry});
@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
 });
 
 
+//Helps and handles the ajax sorting for the date)
 router.get('/sort', function(req, res) {
 	//res.send(req.user);
 	//console.log(req.user);
@@ -28,22 +29,23 @@ router.get('/sort', function(req, res) {
 	var query = req.query; //Is returned as an empty object for some reason...
 	console.log(queryDate);
 	var hold = [];
-	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
+	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) { //Finds the user
 	    var count = 0;
-	    if (user.entry[0].date != undefined) {
-	    	do {
-	    		hold.push(user.entry[count])	;
+	    if (user.entry[0].date != undefined) { 
+	    	do { //Checks through all the user's journal entries
+	    		hold.push(user.entry[count]); //Initial plan was to find the specific entry that matches the date, but had this weird glitch where req.query, req.body and the like were not being taken in, so I had to do the rest on the route page
 	    		count++;
 		    }
 		    while (user.entry[count] != undefined);
 	    }
-	    res.send(hold);
+	    res.send(hold); //Sends the entries off to the route page
   	});
 });
 
 
+//Posts and creates a new journal entry page before redirecting the user to it
 router.post('/create', function(req, res, next) {
-  	var dateIn = req.body.date; //DO THE CLIENT SIDED VALIDATION TO SEE IF THIS IS A VALID DATE
+  	var dateIn = req.body.date;
   	var month = dateIn.slice(0,2);
   	var day = dateIn.slice(2,4);
   	var year = dateIn.slice(4,6);
@@ -51,7 +53,7 @@ router.post('/create', function(req, res, next) {
   	var exerciseSet = [];
   	User.findOne({username: req.user.username}).populate('exercises').exec(function(err, user) {
   		var count=0;
-	    while (user.exercises[count] != undefined) {
+	    while (user.exercises[count] != undefined) { //Stores the current list of exercises the user is doing at that time
 	    	//var exUser = req.user._id;
 	    	var exName = user.exercises[count].name;
 	    	var exQuantity = user.exercises[count].quantity;
@@ -65,7 +67,7 @@ router.post('/create', function(req, res, next) {
 			user: req.user._id,
 			date: dateIn,
 			//exercises: [],
-			exercises: exerciseSet,
+			exercises: exerciseSet, //That previously mentioned current list of exercises
 			comments: "Edit comments",
 			//checked: false
 		});
@@ -81,6 +83,7 @@ router.post('/create', function(req, res, next) {
 });
 
 
+//Get and display the page for the specific journal entry
 router.get('/:slug', function(req, res, next) {
 	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
 		var foundEntry;
@@ -98,11 +101,12 @@ router.get('/:slug', function(req, res, next) {
 });
 
 
+//Posts, handles checking off exercises the user has finished in the checklist of exercises on that journal entry page
 router.post('/check', function(req, res, next) {
 	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
 		var foundEntry; //Speciic entry we are looking at
 		var count = 0;
-		while (user.entry[count] != undefined) {
+		while (user.entry[count] != undefined) { //Finds the specific entry
 			if (user.entry[count].slug == req.body.slug) {
 				foundEntry = user.entry[count];
 				break;
@@ -125,6 +129,7 @@ router.post('/check', function(req, res, next) {
 });
 
 
+//Modifies the comment section on the journal entry page to whatever the user types into the textarea field
 router.post('/modEntry', function(req, res, next) {
 	var comment = req.body.comments;
 	console.log(comment);

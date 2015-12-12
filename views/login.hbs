@@ -1,12 +1,81 @@
 
 <h2>Login</h2>
 {{message}}
-<form method="POST" action="">
-<div>
-	<label>username:</label> <input type="text" name="username">	
-</div>
-<div>
-	<label>password:</label> <input type="password" name="password"> 
-</div>
-	<input type="submit">	
+
+<style>
+.error{
+	display: none;
+	margin-left: 10px;
+}		
+.error_show{
+	color: red;
+	margin-left: 10px;
+}
+input.invalid, textarea.invalid{
+	border: 2px solid red;
+}
+input.valid, textarea.valid{
+	border: 2px solid green;
+}
+</style>
+<script type="text/javascript">
+	//jQuery code goes here
+	$(document).ready(function() { //Upon load, prep this stuff	
+		//Validate in realtime
+		$('#username').on('input', function() { //Username cannot be blank
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		$('#password').on('input', function() { //Password cannot be blank
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		//Validate submission data
+		$("#submitLogin button").click(function(event){	
+			var form_data=$("#login").serializeArray();
+			var error_free=true;
+
+			var element=$("#username");
+			var valid=element.hasClass("valid");
+			var error_element=$("span", element.parent());
+			if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+			else{error_element.removeClass("error_show").addClass("error");}
+
+			element=$("#password");
+			valid=element.hasClass("valid");
+			error_element=$("span", element.parent());
+			if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+			else{error_element.removeClass("error_show").addClass("error");}
+			
+			if (!error_free){
+				event.preventDefault(); 
+			}
+			else{
+				alert('No errors: Form will be submitted');
+			}
+		});
+	});
+</script>
+
+
+<form id="login" method="POST" action="">
+	<div>
+		<label for="username">Username:</label>
+		<input id="username" type="text" name="username">
+		<span class="error">This field is required</span>	
+	</div>
+	<div>
+		<label for="password">Password:</label>
+		<input id="password" type="password" name="password"> 
+		<span class="error">This field is required</span>
+	</div >
+	<div id="submitLogin">
+		<button type="submit">Submit</button>
+	</div>
 </form>
+
+

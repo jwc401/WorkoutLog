@@ -3,6 +3,78 @@
 <h2 >View and Modify Exercises</h2>
 
 
+<style>
+.error{
+	display: none;
+	margin-left: 10px;
+}		
+.error_show{
+	color: red;
+	margin-left: 10px;
+}
+input.invalid, textarea.invalid{
+	border: 2px solid red;
+}
+input.valid, textarea.valid{
+	border: 2px solid green;
+}
+</style>
+<script type="text/javascript">
+	//jQuery code goes here
+	$(document).ready(function() { //Upon load, prep this stuff	
+		//Validate in realtime
+		$('#name').on('input', function() { //Name cannot be blank
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		$('#quantity').on('input', function() { //Quantity cannot be blank
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		$('#intensity').on('input', function() { //Intensity cannot be blank
+			var input=$(this);
+			var is_name=input.val();
+			if(is_name){input.removeClass("invalid").addClass("valid");}
+			else{input.removeClass("valid").addClass("invalid");}
+		});
+		//Validate submission data
+		$("#submitNewExercise button").click(function(event){	
+			var form_data=$("#newExercise").serializeArray();
+			var error_free=true;
+
+			var element=$("#name");
+			var valid=element.hasClass("valid");
+			var error_element=$("span", element.parent());
+			if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+			else{error_element.removeClass("error_show").addClass("error");}
+
+			element=$("#quantity");
+			valid=element.hasClass("valid");
+			error_element=$("span", element.parent());
+			if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+			else{error_element.removeClass("error_show").addClass("error");}
+			
+			element=$("#intensity");
+			valid=element.hasClass("valid");
+			error_element=$("span", element.parent());
+			if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+			else{error_element.removeClass("error_show").addClass("error");}
+
+			if (!error_free){
+				event.preventDefault(); 
+			}
+			else{
+				alert('No errors: Form will be submitted');
+			}
+		});
+	});
+</script>
+
+
 <p>Exercise list:</p>
 <ul>
 	{{#each exercises}}
@@ -11,9 +83,25 @@
 </ul>
 
 
-<form method="POST" action="">
-	<div>Name: <input name = "name" type="text"></div>
-	<div>Quantity: <input name = "quantity" type="text"></div>
-	<div>Intensity: <input name = "intensity" type="text"></div>
-	<div><input value="Insert exercise" type="submit"></div>
+<form id="newExercise" method="POST" action="">
+	<div>
+		<label for="name">Name:</label>
+		<input id="name" type="text" name="name">
+		<span class="error">This field is required</span>	
+	</div>
+	<div>
+		<label for="quantity">Quantity:</label>
+		<input id="quantity" type="text" name="quantity">
+		<span class="error">This field is required</span>	
+	</div>
+	<div>
+		<label for="intensity">Intensity:</label>
+		<input id="intensity" type="text" name="intensity">
+		<span class="error">This field is required</span>	
+	</div>
+	<div id="submitNewExercise">
+		<button type="submit">Create New Exercise</button>
+	</div>
 </form>
+
+

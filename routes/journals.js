@@ -82,7 +82,6 @@ router.post('/create', function(req, res, next) {
 
 
 router.get('/:slug', function(req, res, next) {
-	//console.log(req.params.slug);
 	User.findOne({username: req.user.username}).populate('entry').exec(function(err, user) {
 		var foundEntry;
 		var commentNow;
@@ -111,13 +110,9 @@ router.post('/check', function(req, res, next) {
 			count++;
 		}
 		var checkItems = req.body; //Takes in the request body as an object
-		//console.log(req.body);
 		for (var i=0; i<foundEntry.exercises.length; i++) { //Check through the response body object to see if any of the items in the list were checked off
 			var check = foundEntry.exercises[i].name.split(" ");
-			//if (checkItems.hasOwnProperty(list.items[i].name)) { //If the checkbox was ticked off in the form
-			//	list.items[i].checked = true; //Check off the item
-			//}
-			if (checkItems.hasOwnProperty(check[0])) { //Filter by first word. I can't get words like "ice cream" or other words with spaces in them to get crossed off otherwise
+			if (checkItems.hasOwnProperty(check[0])) { //Filter by first word. I can't get words with spaces in them to get crossed off otherwise
 				foundEntry.exercises[i].checked = true;
 			}
 		}
@@ -126,7 +121,6 @@ router.post('/check', function(req, res, next) {
 		user.entry[count].save(function(err, userl) {
 			res.redirect('/journals/'+foundEntry.slug);
 		});
-		//res.redirect('back');
 	});
 });
 

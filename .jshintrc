@@ -1,0 +1,8 @@
+
+{
+  "curly": true, //All curly braces must match
+  "undef": true, //Require non-global variables to be declared
+  "globals": { //Must have globals of the following
+    "jQuery": true //Need jQuery
+  }
+}

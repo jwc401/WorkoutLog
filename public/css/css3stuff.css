@@ -1,0 +1,54 @@
+#userBanner {
+    background-color: #0066FF;
+    position: relative;
+    -webkit-animation-name: userBanner; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: infinite; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes userBanner {
+    0%   {background-color:#0066FF;}
+    50%  {background-color:#C0C0C0;}
+    100% {background-color:#0066FF;}
+}
+#enterBanner {
+    background-color: #FF9900;
+    position: relative;
+    -webkit-animation-name: enterBanner; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: infinite; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+/* Chrome, Safari, Opera */
+@-webkit-keyframes enterBanner {
+    0%   {background-color:#FF9900;}
+    50%  {background-color:#C0C0C0;}
+    100% {background-color:#FF9900;}
+}
+
+
+@-webkit-keyframes rotating {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+.rotating {
+    -webkit-animation: rotating 2s linear infinite;
+}
+
+
+#userButtonHover:hover {
+    background: #0066FF;
+}
+#enterButtonHover:hover {
+    background: #FF9900;
+}

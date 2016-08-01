@@ -1,3 +1,5 @@
+
+
 <div>Sort By: 
 <form method="POST" id="sortEntries" action="">
 	<select name="filterType">
